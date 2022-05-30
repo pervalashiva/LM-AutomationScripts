@@ -1,0 +1,32 @@
+{
+  "name": "seleniumproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "truck": "npx wdio run wdio.conf.js --spec ./test/specs/truck.js",
+    "trailer": "npx wdio run wdio.conf.js --spec ./test/specs/trailer.js",
+    "driver": "npx wdio run wdio.conf.js --spec ./test/specs/driver.js",
+    "dispatcher": "npx wdio run wdio.conf.js --spec ./test/specs/dispatcher.js",
+    "customer": "npx wdio run wdio.conf.js --spec ./test/specs/customers.js",
+    "carrier": "npx wdio run wdio.conf.js --spec ./test/specs/carrier.js",
+    "generateReport": "allure generate allure-results --clean && allure open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^7.16.14",
+    "@wdio/cli": "^7.16.14",
+    "@wdio/local-runner": "^7.16.14",
+    "@wdio/mocha-framework": "^7.16.14",
+    "@wdio/spec-reporter": "^7.16.14",
+    "chromedriver": "^98.0.0",
+    "wdio-chromedriver-service": "^7.2.6"
+  },
+  "dependencies": {
+    "chai": "^4.3.6",
+    "chai-properties": "^1.4.0"
+  }
+}
