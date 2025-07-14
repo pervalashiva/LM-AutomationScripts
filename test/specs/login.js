@@ -6,8 +6,14 @@ describe('Login application',function()
 {
     //Test case for Login with invalid UserId Valid Password
     it("Login with invalid UserId Valid Password", async()=>{
-       await browser.setWindowSize(1920, 1080);
+      // await browser.setWindowSize(1920, 1080);
+
+
+ await browser.setWindowSize(2560, 1440);  // Or you can use larger values like 2560x1440
+
        await browser.url(CONSTANT.LOGIN_URL)
+
+       await $("//button[normalize-space()='Login']").click()
        await browser.pause(2000)
        await LoginPage.Login(CONSTANT.INVALID_USRID, CONSTANT.VALID_PAWD);
         await expect(LoginPage.toastMessage).toHaveTextContaining("Invalid UserId and Password")

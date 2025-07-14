@@ -2,7 +2,7 @@ class  LoginPage
 {
     get  userName()
     {
-        return $("input[name='email']")
+        return $("input[name='username']")
     }
     get password()
     {
@@ -10,7 +10,7 @@ class  LoginPage
     }
     get login()
     {
-        return $("//button[normalize-space()='Login']")
+        return $("input[name='login']")  
     }
 
     get toastMessage()

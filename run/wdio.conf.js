@@ -21,27 +21,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './test/specs/login.js',
-        './test/specs/forgot.js',
-        './test/specs/truck.js',
-        './test/specs/viewtruck.js',
-        './test/specs/updatetruck.js',
-        './test/specs/viewupdatedtruck.js',
-        './test/specs/trailer.js',
-        './test/specs/dispatcher.js',
-        './test/specs/driver.js',
-        './test/specs/carrier.js',
-        './test/specs/customers.js',
-        './test/specs/createload.js',  
-        './test/specs/createinvoice.js',
-        './test/specs/driverpay.js',
-        './test/specs/carrierpay.js',
-        './test/specs/dispatcherpay.js',
-        './test/specs/factor.js',
-        './test/specs/fuelcard.js',
-        './test/specs/incident.js',
-        './test/specs/insurance.js'
-
+        './test/specs/**/*.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -69,25 +49,18 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-    
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 5,
-        //
-        browserName: 'chrome',
-        'goog:chromeOptions': {
-            // to run chrome headless the following flags are required
-            // (see https://developers.google.com/web/updates/2017/04/headless-chrome)
-            // args: ['--headless', '--disable-gpu'],
-            },
-        acceptInsecureCerts: true
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+ capabilities: [{
+    maxInstances: 5,
+    browserName: 'chrome',
+    acceptInsecureCerts: true,
+    'goog:chromeOptions': {
+        args: [
+            '--disable-gpu', // Disable GPU hardware acceleration (optional)
+            '--window-size=1920x1080'  // Set the window size
+        ]
+    }
+}],
+
     //
     // ===================
     // Test Configurations
@@ -95,9 +68,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'silent',
-
-    
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:
@@ -137,12 +108,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [
-  ['webdriver-manager', {
-      logFileName: 'wdio-webdriver-manager.log', // Log file name
-      outputDir: './driver-logs', // Directory for logs
-  }]
-],
+    services: ['chromedriver'],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -173,13 +139,8 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 600000
+        timeout: 60000
     },
-
-    reporters: [['allure', {
-        outputDir: 'allure-results',
-        disableWebdriverScreenshotsReporting: false,
-    }]],
     //
     // =====
     // Hooks
@@ -201,10 +162,19 @@ exports.config = {
      * @param  {String} cid      capability id (e.g 0-0)
      * @param  {[type]} caps     object containing capabilities for session that will be spawn in the worker
      * @param  {[type]} specs    specs to be run in the worker process
-     * @param  {[type]} args     object that will be merged with the main configuration once worker is initialised
+     * @param  {[type]} args     object that will be merged with the main configuration once worker is initialized
      * @param  {[type]} execArgv list of string arguments passed to the worker process
      */
     // onWorkerStart: function (cid, caps, specs, args, execArgv) {
+    // },
+    /**
+     * Gets executed just after a worker process has exited.
+     * @param  {String} cid      capability id (e.g 0-0)
+     * @param  {Number} exitCode 0 - success, 1 - fail
+     * @param  {[type]} specs    specs to be run in the worker process
+     * @param  {Number} retries  number of retries used
+     */
+    // onWorkerEnd: function (cid, exitCode, specs, retries) {
     // },
     /**
      * Gets executed just before initialising the webdriver session and test framework. It allows you
@@ -241,7 +211,6 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    
     // beforeTest: function (test, context) {
     // },
     /**
@@ -250,9 +219,6 @@ exports.config = {
      */
     // beforeHook: function (test, context) {
     // },
-    
-   
-    
     /**
      * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
      * afterEach in Mocha)
@@ -269,11 +235,8 @@ exports.config = {
      * @param {Boolean} result.passed    true if test has passed, otherwise false
      * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    afterTest: function(test, context, { error, result, duration, passed, retries }) {
-        if (error) {
-            browser.takeScreenshot();
-          }
-    },
+    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
+    // },
 
 
     /**
@@ -323,6 +286,6 @@ exports.config = {
     * @param {String} oldSessionId session ID of the old session
     * @param {String} newSessionId session ID of the new session
     */
-    //onReload: function(oldSessionId, newSessionId) {
-    //}
+    // onReload: function(oldSessionId, newSessionId) {
+    // }
 }

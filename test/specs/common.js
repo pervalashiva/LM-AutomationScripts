@@ -1,9 +1,9 @@
 module.exports = {
-    LOGIN_URL: "http://loadmiless3.s3-website-us-east-1.amazonaws.com/#/login",
+    LOGIN_URL: "https://dev.loadmiles.com/login",
     INVALID_USRID: "shiva.pervala+test2@gmail.com",
-    VALID_USRID: "shiva.pervala+test1@gmail.com",
-    INVALID_PAWD: "9030341609",
-    VALID_PAWD: "9030341607"
+    VALID_USRID: "nakure@yopmail.com",
+    INVALID_PAWD: "test1234",
+    VALID_PAWD: "test31"
 
 }
 
